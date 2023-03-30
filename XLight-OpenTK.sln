@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XLight-OpenTK", "XLight-OpenTK\XLight-OpenTK.csproj", "{97C6AACD-CC4D-498D-BFEA-2160A4F81D9F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XLightDemo", "XLightDemo\XLightDemo.csproj", "{E81864FC-9D96-424E-A2EA-265AC60221D5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XLightStudio", "XLightStudio\XLightStudio.csproj", "{92798261-C1F0-4582-95FE-62694852E79B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{97C6AACD-CC4D-498D-BFEA-2160A4F81D9F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{97C6AACD-CC4D-498D-BFEA-2160A4F81D9F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{97C6AACD-CC4D-498D-BFEA-2160A4F81D9F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{97C6AACD-CC4D-498D-BFEA-2160A4F81D9F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E81864FC-9D96-424E-A2EA-265AC60221D5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E81864FC-9D96-424E-A2EA-265AC60221D5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E81864FC-9D96-424E-A2EA-265AC60221D5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E81864FC-9D96-424E-A2EA-265AC60221D5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{92798261-C1F0-4582-95FE-62694852E79B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{92798261-C1F0-4582-95FE-62694852E79B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{92798261-C1F0-4582-95FE-62694852E79B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{92798261-C1F0-4582-95FE-62694852E79B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

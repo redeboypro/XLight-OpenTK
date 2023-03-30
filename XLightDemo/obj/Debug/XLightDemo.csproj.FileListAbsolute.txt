@@ -1,0 +1,14 @@
+E:\Development\RiderIDE\Projects\XLight-OpenTK\XLightDemo\bin\Debug\XLightDemo.exe
+E:\Development\RiderIDE\Projects\XLight-OpenTK\XLightDemo\bin\Debug\XLightDemo.pdb
+E:\Development\RiderIDE\Projects\XLight-OpenTK\XLightDemo\bin\Debug\AssimpNet.dll
+E:\Development\RiderIDE\Projects\XLight-OpenTK\XLightDemo\bin\Debug\OpenTK.dll
+E:\Development\RiderIDE\Projects\XLight-OpenTK\XLightDemo\bin\Debug\XLight_OpenTK.dll
+E:\Development\RiderIDE\Projects\XLight-OpenTK\XLightDemo\bin\Debug\XLight_OpenTK.pdb
+E:\Development\RiderIDE\Projects\XLight-OpenTK\XLightDemo\bin\Debug\AssimpNet.xml
+E:\Development\RiderIDE\Projects\XLight-OpenTK\XLightDemo\bin\Debug\OpenTK.pdb
+E:\Development\RiderIDE\Projects\XLight-OpenTK\XLightDemo\bin\Debug\OpenTK.xml
+E:\Development\RiderIDE\Projects\XLight-OpenTK\XLightDemo\obj\Debug\XLightDemo.csprojAssemblyReference.cache
+E:\Development\RiderIDE\Projects\XLight-OpenTK\XLightDemo\obj\Debug\XLightDemo.csproj.CoreCompileInputs.cache
+E:\Development\RiderIDE\Projects\XLight-OpenTK\XLightDemo\obj\Debug\XLightDemo.csproj.CopyComplete
+E:\Development\RiderIDE\Projects\XLight-OpenTK\XLightDemo\obj\Debug\XLightDemo.exe
+E:\Development\RiderIDE\Projects\XLight-OpenTK\XLightDemo\obj\Debug\XLightDemo.pdb

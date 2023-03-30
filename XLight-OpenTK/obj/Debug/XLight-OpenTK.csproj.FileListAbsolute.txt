@@ -1,0 +1,12 @@
+E:\Development\RiderIDE\Projects\XLight-OpenTK\XLight-OpenTK\bin\Debug\XLight_OpenTK.dll
+E:\Development\RiderIDE\Projects\XLight-OpenTK\XLight-OpenTK\bin\Debug\XLight_OpenTK.pdb
+E:\Development\RiderIDE\Projects\XLight-OpenTK\XLight-OpenTK\bin\Debug\AssimpNet.dll
+E:\Development\RiderIDE\Projects\XLight-OpenTK\XLight-OpenTK\bin\Debug\OpenTK.dll
+E:\Development\RiderIDE\Projects\XLight-OpenTK\XLight-OpenTK\bin\Debug\AssimpNet.xml
+E:\Development\RiderIDE\Projects\XLight-OpenTK\XLight-OpenTK\bin\Debug\OpenTK.pdb
+E:\Development\RiderIDE\Projects\XLight-OpenTK\XLight-OpenTK\bin\Debug\OpenTK.xml
+E:\Development\RiderIDE\Projects\XLight-OpenTK\XLight-OpenTK\obj\Debug\XLight-OpenTK.csprojAssemblyReference.cache
+E:\Development\RiderIDE\Projects\XLight-OpenTK\XLight-OpenTK\obj\Debug\XLight-OpenTK.csproj.CoreCompileInputs.cache
+E:\Development\RiderIDE\Projects\XLight-OpenTK\XLight-OpenTK\obj\Debug\XLight-OpenTK.csproj.CopyComplete
+E:\Development\RiderIDE\Projects\XLight-OpenTK\XLight-OpenTK\obj\Debug\XLight_OpenTK.dll
+E:\Development\RiderIDE\Projects\XLight-OpenTK\XLight-OpenTK\obj\Debug\XLight_OpenTK.pdb
