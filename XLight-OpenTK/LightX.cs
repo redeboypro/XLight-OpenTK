@@ -1,16 +1,14 @@
-﻿﻿using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.IO;
-using System.Linq;
-using System.Text;
- using System.Xml;
- using Assimp;
+using System.Xml;
+using Assimp;
 using Assimp.Configs;
 using OpenTK;
 using OpenTK.Graphics;
 using XLight_OpenTK.Rendering;
 using Mesh = XLight_OpenTK.Rendering.Mesh;
+
 // ReSharper disable PossibleNullReferenceException
 
 namespace XLight_OpenTK
@@ -45,7 +43,7 @@ namespace XLight_OpenTK
                 {
                     numberOfFacesInCurrentRow = numberOfColumns;
                 }
-                
+
                 var lightCache = new LightCache(lightmapTexture);
 
                 var currentIndex = row * roundedNumOfFacesInOneMap;
@@ -85,7 +83,7 @@ namespace XLight_OpenTK
                                 break;
                             }
                         }
-                        
+
                         BakeFace(IsHigher(receiver.A.Normal),
                             lightmapSize,
                             projectedPoints,
@@ -101,7 +99,7 @@ namespace XLight_OpenTK
                     localIndex++;
                 }
             }
-            
+
             var meshVertices = new List<Vector3>();
             var meshBaseUVs = new List<Vector2>();
             var meshLightmapUVs = new List<Vector2>();
@@ -184,7 +182,7 @@ namespace XLight_OpenTK
                     new Vector2(projectedPoints[2][axisBIndex], projectedPoints[2][axisAIndex])
                 };
             }
-            
+
             var min = GetMin(receiverTextureCoordinates);
 
             for (var i = 0; i < FaceVertexCount; i++)
@@ -207,7 +205,7 @@ namespace XLight_OpenTK
 
             var textureHeight = lightmapTexture.Height;
             var textureWidth = lightmapTexture.Width;
-            
+
 
             for (var i = 0; i < FaceVertexCount; i++)
             {
@@ -215,7 +213,7 @@ namespace XLight_OpenTK
                 {
                     receiverTextureCoordinates[i].X /= scissorX;
                     receiverTextureCoordinates[i].X += shiftX;
-                    
+
                     receiverTextureCoordinates[i].Y /= scissorY;
                     receiverTextureCoordinates[i].Y += shiftY;
                 }
@@ -224,12 +222,12 @@ namespace XLight_OpenTK
                 {
                     continue;
                 }
-                
+
                 //Projector to uv conversion
                 {
                     projectorToPlane[i].X /= scissorX;
                     projectorToPlane[i].X += shiftX;
-                    
+
                     projectorToPlane[i].Y /= scissorY;
                     projectorToPlane[i].Y += shiftY;
                 }
@@ -241,21 +239,21 @@ namespace XLight_OpenTK
             receiver.B.LightmapUV = receiverTextureCoordinates[1];
 
             receiver.C.LightmapUV = receiverTextureCoordinates[2];
-            
-            
+
+
             var diffuseFactor = Math.Max(Vector3.Dot(receiver.A.Normal, -lightDirection),
-                                    MinimumDiffuse) + Ambient;
+                MinimumDiffuse) + Ambient;
             var diffuseColor = ShadePixel(Math.Min(diffuseFactor, 1.0f));
-            
+
             var shadowFactor = MinimumDiffuse + Ambient;
             var shadowColor = ShadePixel(shadowFactor);
-            
+
             var lightmapStartX = lightmapUnitSize * faceIndex;
             var lightmapStartY = row * lightmapUnitSize;
             var lightmapEndX = lightmapStartX + lightmapUnitSize;
             var lightmapEndY = lightmapStartY + lightmapUnitSize;
 
-            for (var y =  lightmapStartY; y < lightmapEndY; y++)
+            for (var y = lightmapStartY; y < lightmapEndY; y++)
             {
                 for (var x = lightmapStartX; x < lightmapEndX; x++)
                 {
@@ -272,14 +270,14 @@ namespace XLight_OpenTK
                     {
                         continue;
                     }
-                    
+
                     var pixelIsInsideProjector = PointIsInsideTriangle(projectorToPlane, pixelToTex);
-                    
+
                     if (!pixelIsInsideProjector)
                     {
                         continue;
                     }
-                    
+
                     lightmapTexture.SetPixel(x, y, shadowColor);
                     lightCache.Pixels[y, x] = true;
                 }
@@ -289,11 +287,11 @@ namespace XLight_OpenTK
         private static Color ShadePixel(float shadowFactor)
         {
             var red = LightColor.R * shadowFactor * 255.0f;
-            
+
             var green = LightColor.G * shadowFactor * 255.0f;
-            
+
             var blue = LightColor.B * shadowFactor * 255.0f;
-            
+
             return Color.FromArgb((int) red, (int) green, (int) blue);
         }
 
@@ -393,7 +391,7 @@ namespace XLight_OpenTK
             return true;
         }
 
-        private static bool PointIsInsideTriangle(Vector2[] trianglePoints, Vector2 testPoint)
+        private static bool PointIsInsideTriangle(IReadOnlyList<Vector2> trianglePoints, Vector2 testPoint)
         {
             var a = trianglePoints[0];
 
@@ -442,16 +440,18 @@ namespace XLight_OpenTK
         public static Face[] LoadMesh(string fileName)
         {
             var outFaces = new List<Face>();
-            
+
             var importer = new AssimpContext();
             importer.SetConfig(new NormalSmoothingAngleConfig(66.0f));
-            var scene = importer.ImportFile(fileName, PostProcessSteps.FlipUVs | PostProcessSteps.CalculateTangentSpace);
+            var scene = importer.ImportFile(fileName,
+                PostProcessSteps.FlipUVs | PostProcessSteps.CalculateTangentSpace);
             var mesh = scene.Meshes[0];
             var inFaces = mesh.Faces;
 
-            foreach (var face in inFaces) {
+            foreach (var face in inFaces)
+            {
                 const int vertexCount = 3;
-                
+
                 var vertices = new Vertex[vertexCount];
 
                 for (var i = 0; i < vertexCount; i++)
@@ -460,7 +460,7 @@ namespace XLight_OpenTK
                     var vertexOrigin = mesh.Vertices[index].ToOpenTK();
                     var normal = mesh.Normals[index].ToOpenTK();
                     var uv = mesh.TextureCoordinateChannels[0][index].ToOpenTK().Xy;
-                    
+
                     vertices[i] = new Vertex
                     {
                         WorldLocation = vertexOrigin,
@@ -468,7 +468,7 @@ namespace XLight_OpenTK
                         BaseUV = uv
                     };
                 }
-                
+
                 outFaces.Add(new Face(vertices[0], vertices[1], vertices[2]));
             }
 
@@ -476,6 +476,7 @@ namespace XLight_OpenTK
         }
 
         #region [ Save / Load ]
+
         private const string ModelDataPrefix = "ModelData";
 
         private const string FacePrefix = "Face";
@@ -500,6 +501,7 @@ namespace XLight_OpenTK
                 {
                     WriteFaceData(writer, face);
                 }
+
                 writer.WriteEndElement();
                 writer.WriteEndDocument();
                 writer.Flush();
@@ -513,15 +515,16 @@ namespace XLight_OpenTK
             {
                 WriteVertexData(writer, face[v]);
             }
+
             writer.WriteEndElement();
         }
-        
+
         private static void WriteVertexData(XmlWriter writer, Vertex vertex)
         {
             var worldLocation = vertex.WorldLocation;
             var uv0 = vertex.BaseUV;
             var uv1 = vertex.LightmapUV;
-            
+
             writer.WriteStartElement(VertexPrefix);
             writer.WriteElementString(WorldPositionPrefix, $"{worldLocation.X} {worldLocation.Y} {worldLocation.Z}");
             writer.WriteElementString(UV0Prefix, $"{uv0.X} {uv0.Y}");
@@ -603,7 +606,7 @@ namespace XLight_OpenTK
             outVector.Z = float.Parse(data[2]);
             return outVector;
         }
-        
+
         private static Vector2 ParseUV(string source)
         {
             var data = source.Split(' ');
@@ -612,6 +615,7 @@ namespace XLight_OpenTK
             outVector.Y = float.Parse(data[1]);
             return outVector;
         }
+
         #endregion
 
         public class LightCache
