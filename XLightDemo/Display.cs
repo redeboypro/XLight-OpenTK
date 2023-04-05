@@ -70,7 +70,8 @@ void main(void) {
         private Shader shader;
 
         private bool isPressed;
-        private float angle;
+        private float yaw;
+        private float pitch;
         private int zoom = 10;
 
         public Display()
@@ -103,10 +104,10 @@ void main(void) {
             texture = new Texture(new Bitmap("test.png"));
             
             var rawMesh = LoadMesh("test.obj");
-            (mesh, lightmap) = Bake(rawMesh, new Vector3(0.5f, -1.0f, 0.5f), 64, 4);
+            (mesh, lightmap) = Bake(rawMesh, new Vector3(0.5f, -1.0f, 0.5f), 128, 4);
             
-            ExportXml("test.txt", mesh);
-            lightmap.Save("lightmap.png");
+            //ExportXml("test.txt", mesh);
+            //lightmap.Save("lightmap.png");
             
             //mesh = ImportXml("test.txt");
             //lightmap = new Texture(new Bitmap("lightmap.png"));
@@ -141,11 +142,14 @@ void main(void) {
             base.OnMouseMove(e);
             if (isPressed)
             {
-                angle += e.XDelta;
-                if (angle > 360 || angle < -360)
+                yaw += e.XDelta;
+                if (yaw > 360 || yaw < -360)
                 {
-                    angle = 0;
+                    yaw = 0;
                 }
+
+                pitch += e.YDelta;
+                pitch = MathHelper.Clamp(pitch, -89.0f, 89.0f);
             }
         }
 
@@ -155,12 +159,16 @@ void main(void) {
 
             if (!isPressed)
             {
-                angle += (float) e.Time * 15;
+                yaw += (float) e.Time * 15;
             }
 
-            var z = (float)-Math.Cos(MathHelper.DegreesToRadians(angle)) * zoom;
-            var x = (float) Math.Sin(MathHelper.DegreesToRadians(angle)) * zoom;
-            XCamera.WorldLocation = new Vector3(x, 5.0f, z);
+            var x = (float) Math.Sin(MathHelper.DegreesToRadians(yaw));
+            
+            var y = (float) Math.Tan(MathHelper.DegreesToRadians(pitch));
+            
+            var z = (float) -Math.Cos(MathHelper.DegreesToRadians(yaw));
+            
+            XCamera.WorldLocation = new Vector3(x, y, z).Normalized() * zoom;
         }
 
         protected override void OnRenderFrame(FrameEventArgs e)

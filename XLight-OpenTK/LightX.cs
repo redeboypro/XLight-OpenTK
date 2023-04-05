@@ -22,6 +22,10 @@ namespace XLight_OpenTK
         public static float Ambient { get; set; } = 0.3f;
 
         public static float MinimumDiffuse { get; set; } = 0.35f;
+        
+        public static int StepSize { get; set; } = 2;
+        
+        public static float StepBias { get; set; } = 0.01f;
 
         public static (Mesh, Texture) Bake(Face[] faces, Vector3 lightDirection, int lightmapSize, int numberOfRows)
         {
@@ -206,7 +210,6 @@ namespace XLight_OpenTK
             var textureHeight = lightmapTexture.Height;
             var textureWidth = lightmapTexture.Width;
 
-
             for (var i = 0; i < FaceVertexCount; i++)
             {
                 //Receiver to uv conversion
@@ -258,8 +261,21 @@ namespace XLight_OpenTK
                 for (var x = lightmapStartX; x < lightmapEndX; x++)
                 {
                     var pixelToTex = new Vector2(x / (float) textureWidth, y / (float) textureHeight);
+                    var pixelIsInsideReceiver = false;
 
-                    var pixelIsInsideReceiver = PointIsInsideTriangle(receiverTextureCoordinates, pixelToTex);
+                    for (var yOffset = 0; yOffset < StepSize; yOffset++)
+                    {
+                        for (var xOffset = 0; xOffset < StepSize; xOffset++)
+                        {
+                            Vector2 offset;
+                            offset.X = xOffset * StepBias;
+                            offset.Y = yOffset * StepBias;
+                            if (PointIsInsideTriangle(receiverTextureCoordinates, pixelToTex + offset))
+                            {
+                                pixelIsInsideReceiver = true;
+                            }
+                        }
+                    }
 
                     if (!lightCache.Pixels[y, x])
                     {
